@@ -7,7 +7,7 @@ A portable shell environment setup that provides a consistent, feature-rich term
 Clone this repository and run the setup script:
 
 ```bash
-git clone <your-repo-url> ~/Shell-Pro
+git clone https://github.com/kunal5042/Shell-Pro.git ~/Shell-Pro
 cd ~/Shell-Pro
 chmod +x setup.sh
 ./setup.sh
