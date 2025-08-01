@@ -221,3 +221,8 @@ echo ""
 echo "📂 Your Shell-Pro directory: $SHELL_PRO_DIR"
 echo "📝 Custom configurations: $SHELL_PRO_DIR/.zsh/"
 echo ""
+
+echo "🔄 Restarting terminal..."
+print_success "Ampliying your terminal experience..."
+print_success "Enjoy!, thank to @kunalwadhwa"
+zsh
