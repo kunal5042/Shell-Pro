@@ -29,7 +29,7 @@ setup_zshrc_config() {
     echo "export ZDOTDIR=\"$SHELL_PRO_DIR\"" > ~/.zshenv
     
     # Copy .zshrc from Shell-Pro
-    cp "$SHELL_PRO_DIR/.zshrc" "$HOME/.zshrc"
+    ln -sf "$SHELL_PRO_DIR/.zshrc" "$HOME/.zshrc"
     
     print_success ".zshrc configuration applied"
 }
