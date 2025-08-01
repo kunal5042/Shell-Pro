@@ -36,6 +36,12 @@ Thumbs.db
 # Cache directories
 .cache/
 
+# Testing files
+Dockerfile*
+docker-compose.test.yml
+test-shell-pro.sh
+test-commands.md
+
 # Keep the core configuration files
 !.zshrc
 !.zsh/
