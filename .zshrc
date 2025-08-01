@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# zsh-completions
+autoload -U compinit && compinit
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -38,7 +41,13 @@ zstyle ':omz:update' frequency
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z zsh-autosuggestions)
+plugins=(
+  git 
+  z 
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-completions
+  you-should-use)
 
 export HISTFILE="$ZDOTDIR/.zsh_history"
 source $ZSH/oh-my-zsh.sh
