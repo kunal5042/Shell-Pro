@@ -1,0 +1,42 @@
+# macOS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Shell environment specific
+.zshrc.backup.*
+.zsh_sessions/*
+.zsh_sessions/.zsh_history
+.zsh_history
+.zcompdump*
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Local environment variables
+.env
+.env.local
+
+# Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Cache directories
+.cache/
+
+# Keep the core configuration files
+!.zshrc
+!.zsh/
+!setup.sh
