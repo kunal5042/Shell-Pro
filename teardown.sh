@@ -34,7 +34,7 @@ print_status "🚀 Starting automatic teardown in 10 seconds..."
 print_warning "⏰ Press Ctrl+C NOW to cancel, or wait for automatic execution"
 echo ""
 
-for i in {10..1}; do
+for i in {15..1}; do
     echo -ne "\r⏰ Teardown starts in: $i seconds... "
     sleep 1
 done
