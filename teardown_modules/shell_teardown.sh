@@ -42,23 +42,19 @@ restore_original_shell() {
         local original_shell
         original_shell="$(get_original_shell)"
         
-        if confirm_action "Current default shell is zsh. Change default shell back to $original_shell?"; then
-            print_status "Changing default shell from zsh to $original_shell..."
-            
-            if command_exists chsh; then
-                if chsh -s "$original_shell" 2>/dev/null; then
-                    print_success "Default shell changed to $original_shell"
-                    print_status "You may need to restart your terminal for changes to take effect"
-                else
-                    print_warning "Failed to change default shell automatically"
-                    print_warning "You can manually change it by running: chsh -s $original_shell"
-                fi
+        log_action "Changing default shell from zsh back to $original_shell"
+        
+        if command_exists chsh; then
+            if chsh -s "$original_shell" 2>/dev/null; then
+                print_success "Default shell changed to $original_shell"
+                print_status "You may need to restart your terminal for changes to take effect"
             else
-                print_warning "chsh command not available"
-                print_warning "You can manually change your default shell to: $original_shell"
+                print_warning "Failed to change default shell automatically"
+                print_warning "You can manually change it by running: chsh -s $original_shell"
             fi
         else
-            print_status "Keeping zsh as default shell"
+            print_warning "chsh command not available"
+            print_warning "You can manually change your default shell to: $original_shell"
         fi
     else
         print_status "Default shell is not zsh, no changes needed"

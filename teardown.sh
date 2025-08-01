@@ -15,25 +15,27 @@ echo "🧹 Shell-Pro Teardown Script"
 echo "=============================="
 echo ""
 
-print_warning "This script will completely remove Shell-Pro and attempt to restore your system"
-print_warning "to its state before Shell-Pro was installed."
+print_error "⚠️  AUTOMATIC TEARDOWN MODE ⚠️"
+print_error "This script will AUTOMATICALLY and COMPLETELY remove Shell-Pro!"
 echo ""
-print_status "What this script will do:"
-echo "  • Restore original .zshrc from backup (if available)"
-echo "  • Remove Shell-Pro .zshrc and .zshenv configurations"
-echo "  • Remove Oh My Zsh installation (with confirmation)"
-echo "  • Restore original default shell (if changed to zsh)"
-echo "  • Clean up backup files created by Shell-Pro"
-echo "  • Provide guidance for font cleanup"
-echo "  • Remove the entire Shell-Pro repository (final step)"
+print_warning "🔥 WHAT WILL BE DELETED (NO QUESTIONS ASKED):"
+echo "  • ALL Shell-Pro .zshrc and .zshenv configurations"
+echo "  • Oh My Zsh installation and ALL configurations"
+echo "  • All backup files created by Shell-Pro"
+echo "  • Default shell will be restored (if changed to zsh)"
+echo "  • The ENTIRE Shell-Pro repository and all files"
+echo "  • All custom themes and plugins"
 echo ""
-print_warning "⚠️  Some changes (like installed fonts) may require manual cleanup"
+print_error "⚠️  This action CANNOT be undone!"
+print_error "⚠️  Font cleanup guidance will be provided but fonts won't be auto-removed"
 echo ""
 
-if ! confirm_action "Do you want to proceed with the Shell-Pro teardown?"; then
-    print_status "Teardown cancelled. No changes were made."
-    exit 0
-fi
+print_status "🚀 Starting automatic teardown in 3 seconds..."
+sleep 1 && echo "3..." 
+sleep 1 && echo "2..." 
+sleep 1 && echo "1..." 
+echo ""
+print_status "🔥 TEARDOWN INITIATED - NO TURNING BACK!"
 
 echo ""
 print_status "Shell-Pro directory: $SHELL_PRO_DIR"
@@ -86,14 +88,11 @@ echo ""
 
 # Final step: Remove the repository itself
 print_status "Step 7: Repository removal..."
-if remove_shell_pro_repository "$SHELL_PRO_DIR"; then
-    # This will only run if repository removal was cancelled
-    echo ""
-    print_success "Teardown completed (repository preserved)"
-    print_status "If you want to remove the repository later, you can manually delete: $SHELL_PRO_DIR"
-    echo ""
-    print_status "Restart your terminal to ensure all changes take effect"
-else
-    # Script will end here if repository was successfully removed
-    echo "Script completed"
-fi
+remove_shell_pro_repository "$SHELL_PRO_DIR"
+
+# This line will only execute if the repository removal failed
+# If successful, the script ends when the repository is deleted
+print_status "Restart your terminal to ensure all changes take effect"
+print_success "Thank you for using Shell-Pro, hope you enjoyed it!"
+print_success "Taking you back to old age..."
+sh

@@ -10,6 +10,7 @@ Clone this repository and run the setup script:
 git clone https://github.com/kunal5042/Shell-Pro.git ~/Shell-Pro
 cd ~/Shell-Pro
 chmod +x setup.sh
+chmod +x teardown.sh
 ./setup.sh
 ```
 

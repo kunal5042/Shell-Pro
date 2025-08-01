@@ -79,18 +79,8 @@ safe_remove() {
     fi
 }
 
-# Function to ask for user confirmation
-confirm_action() {
+# Function to log actions (no confirmation needed)
+log_action() {
     local message="$1"
-    echo -e "${YELLOW}⚠️  $message${NC}"
-    echo -n "Do you want to proceed? (y/N): "
-    read -r response
-    case "$response" in
-        [yY][eE][sS]|[yY]) 
-            return 0
-            ;;
-        *)
-            return 1
-            ;;
-    esac
+    print_status "EXECUTING: $message"
 }

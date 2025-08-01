@@ -21,51 +21,35 @@ remove_shell_pro_repository() {
     fi
     
     echo ""
-    print_warning "🗑️  FINAL STEP: Complete Repository Removal"
-    echo ""
-    print_status "This will permanently delete the entire Shell-Pro repository:"
+    log_action "FINAL STEP: Complete Repository Removal"
+    print_status "Permanently deleting the entire Shell-Pro repository:"
     print_status "  📂 Directory: $SHELL_PRO_DIR"
     print_status "  📝 All setup scripts and configurations"
     print_status "  🔧 All custom themes and plugins"
     print_status "  📋 This teardown script itself"
     echo ""
-    print_error "⚠️  This action CANNOT be undone!"
-    echo ""
     
-    if confirm_action "Are you absolutely sure you want to delete the entire Shell-Pro repository?"; then
-        # Change to parent directory to avoid deleting from within the directory
-        local parent_dir="$(dirname "$SHELL_PRO_DIR")"
-        cd "$parent_dir" 2>/dev/null || {
-            print_error "Cannot navigate to parent directory"
-            return 1
-        }
-        
-        # Double confirmation for safety
+    # Change to parent directory to avoid deleting from within the directory
+    local parent_dir="$(dirname "$SHELL_PRO_DIR")"
+    cd "$parent_dir" 2>/dev/null || {
+        print_error "Cannot navigate to parent directory"
+        return 1
+    }
+    
+    print_status "Removing Shell-Pro repository..."
+    
+    # Use safe_remove function
+    if safe_remove "$SHELL_PRO_DIR" "Shell-Pro repository"; then
         echo ""
-        print_error "⚠️  LAST CHANCE: About to permanently delete: $SHELL_PRO_DIR"
-        if confirm_action "Type 'yes' to confirm complete removal"; then
-            print_status "Removing Shell-Pro repository..."
-            
-            # Use safe_remove function
-            if safe_remove "$SHELL_PRO_DIR" "Shell-Pro repository"; then
-                echo ""
-                print_success "🎉 Shell-Pro repository completely removed!"
-                print_success "Your system has been restored to its pre-Shell-Pro state"
-                echo ""
-                print_status "Thank you for using Shell-Pro! 👋"
-                echo ""
-                return 0
-            else
-                print_error "Failed to remove Shell-Pro repository"
-                print_status "You may need to manually remove: $SHELL_PRO_DIR"
-                return 1
-            fi
-        else
-            print_status "Repository removal cancelled"
-            return 1
-        fi
+        print_success "🎉 Shell-Pro repository completely removed!"
+        print_success "Your system has been restored to its pre-Shell-Pro state"
+        echo ""
+        print_status "Thank you for using Shell-Pro! 👋"
+        echo ""
+        return 0
     else
-        print_status "Repository removal cancelled"
+        print_error "Failed to remove Shell-Pro repository"
+        print_status "You may need to manually remove: $SHELL_PRO_DIR"
         return 1
     fi
 }
