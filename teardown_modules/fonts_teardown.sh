@@ -3,8 +3,8 @@
 # Shell-Pro Fonts Teardown Module
 # Provides guidance for font cleanup (fonts are tricky to auto-remove)
 
-# Source teardown utilities
-source "$(dirname "$0")/teardown_utils.sh"
+# Source teardown utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/teardown_utils.sh"
 
 # Provide guidance for font removal
 provide_font_cleanup_guidance() {

@@ -3,8 +3,8 @@
 # Shell-Pro Shell Configuration Teardown Module
 # Handles restoration of original default shell
 
-# Source teardown utilities
-source "$(dirname "$0")/teardown_utils.sh"
+# Source teardown utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/teardown_utils.sh"
 
 # Get the original shell before Shell-Pro was installed
 get_original_shell() {

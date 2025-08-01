@@ -3,8 +3,8 @@
 # Shell-Pro Oh My Zsh Teardown Module
 # Handles removal of Oh My Zsh installation
 
-# Source teardown utilities
-source "$(dirname "$0")/teardown_utils.sh"
+# Source teardown utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/teardown_utils.sh"
 
 # Remove Oh My Zsh installation
 remove_oh_my_zsh() {

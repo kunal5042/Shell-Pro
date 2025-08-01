@@ -3,8 +3,8 @@
 # Shell-Pro Configuration Setup Module
 # Handles backup and configuration of .zshrc
 
-# Source utilities
-source "$(dirname "$0")/utils.sh"
+# Source utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/utils.sh"
 
 # Backup existing .zshrc if it exists and is different
 backup_existing_config() {

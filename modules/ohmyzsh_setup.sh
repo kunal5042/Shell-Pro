@@ -3,8 +3,8 @@
 # Shell-Pro Oh My Zsh Setup Module
 # Handles Oh My Zsh installation
 
-# Source utilities
-source "$(dirname "$0")/utils.sh"
+# Source utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/utils.sh"
 
 # Install Oh My Zsh if not already installed
 install_oh_my_zsh() {

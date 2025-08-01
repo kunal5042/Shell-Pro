@@ -3,8 +3,8 @@
 # Shell-Pro Configuration Teardown Module
 # Handles restoration of original configurations
 
-# Source teardown utilities
-source "$(dirname "$0")/teardown_utils.sh"
+# Source teardown utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/teardown_utils.sh"
 
 # Restore original .zshrc from backup
 restore_original_zshrc() {

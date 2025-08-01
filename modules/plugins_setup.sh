@@ -3,8 +3,8 @@
 # Shell-Pro Plugins and Themes Setup Module
 # Handles verification of custom plugins and themes
 
-# Source utilities
-source "$(dirname "$0")/utils.sh"
+# Source utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/utils.sh"
 
 # Verify custom plugins and themes are available
 verify_plugins_and_themes() {

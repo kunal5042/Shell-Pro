@@ -3,8 +3,8 @@
 # Shell-Pro Repository Teardown Module
 # Handles removal of the Shell-Pro repository itself
 
-# Source teardown utilities
-source "$(dirname "$0")/teardown_utils.sh"
+# Source teardown utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/teardown_utils.sh"
 
 # Remove the entire Shell-Pro repository
 remove_shell_pro_repository() {

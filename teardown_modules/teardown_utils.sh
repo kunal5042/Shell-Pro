@@ -27,9 +27,26 @@ print_error() {
     echo -e "${RED}[TEARDOWN ERROR]${NC} $1"
 }
 
+# Cross-compatible function to get the directory of any script
+get_script_dir() {
+    local script_path="${1:-${BASH_SOURCE[1]:-${(%):-%x}}}"
+    echo "$(cd "$(dirname "$script_path")" && pwd)"
+}
+
 # Function to get the Shell-Pro directory path
 get_shell_pro_dir() {
-    echo "$(cd "$(dirname "${BASH_SOURCE[1]}")" && pwd)"
+    local source_file
+    if [ -n "${BASH_SOURCE[1]}" ]; then
+        # Running in bash
+        source_file="${BASH_SOURCE[1]}"
+    elif [ -n "${(%):-%x}" ]; then
+        # Running in zsh
+        source_file="${(%):-%x}"
+    else
+        # Fallback
+        source_file="$0"
+    fi
+    echo "$(cd "$(dirname "$source_file")" && pwd)"
 }
 
 # Function to check if a command exists

@@ -3,8 +3,8 @@
 # Shell-Pro ZSH Setup Module
 # Handles ZSH installation and shell switching
 
-# Source utilities
-source "$(dirname "$0")/utils.sh"
+# Source utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/utils.sh"
 
 # Check if zsh is installed and install if needed
 check_and_install_zsh() {

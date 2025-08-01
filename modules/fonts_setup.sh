@@ -3,8 +3,8 @@
 # Shell-Pro Fonts Setup Module
 # Handles Nerd Fonts installation (platform-specific)
 
-# Source utilities
-source "$(dirname "$0")/utils.sh"
+# Source utilities using cross-compatible path detection
+source "$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)/utils.sh"
 
 # Install Nerd Fonts for Powerlevel10k
 install_nerd_fonts() {
