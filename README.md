@@ -9,6 +9,7 @@ Clone this repository and run the setup script:
 ```bash
 git clone <your-repo-url> ~/Shell-Pro
 cd ~/Shell-Pro
+chmod +x setup.sh
 ./setup.sh
 ```
 
