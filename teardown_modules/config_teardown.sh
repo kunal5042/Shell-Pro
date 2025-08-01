@@ -62,7 +62,7 @@ cleanup_zshrc_backups() {
         if [ -f "$backup" ]; then
             if rm "$backup" 2>/dev/null; then
                 print_success "Removed backup: $(basename "$backup")"
-                ((backup_count++))
+                backup_count=$((backup_count + 1))
             else
                 print_warning "Failed to remove backup: $(basename "$backup")"
             fi
