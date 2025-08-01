@@ -30,12 +30,22 @@ print_error "⚠️  This action CANNOT be undone!"
 print_error "⚠️  Font cleanup guidance will be provided but fonts won't be auto-removed"
 echo ""
 
-print_status "🚀 Starting automatic teardown in 3 seconds..."
-sleep 1 && echo "3..." 
-sleep 1 && echo "2..." 
-sleep 1 && echo "1..." 
+print_status "🚀 Starting automatic teardown in 10 seconds..."
+print_warning "⏰ Press Ctrl+C NOW to cancel, or wait for automatic execution"
 echo ""
-print_status "🔥 TEARDOWN INITIATED - NO TURNING BACK!"
+
+for i in {10..1}; do
+    echo -ne "\r⏰ Teardown starts in: $i seconds... "
+    sleep 1
+done
+
+echo ""
+echo ""
+print_error "🚨 POINT OF NO RETURN REACHED! 🚨"
+print_status "🔥 TEARDOWN INITIATED - NO ESCAPE!"
+
+# Disable Ctrl+C after this point
+trap '' INT TERM
 
 echo ""
 print_status "Shell-Pro directory: $SHELL_PRO_DIR"
@@ -95,4 +105,7 @@ remove_shell_pro_repository "$SHELL_PRO_DIR"
 print_status "Restart your terminal to ensure all changes take effect"
 print_success "Thank you for using Shell-Pro, hope you enjoyed it!"
 print_success "Taking you back to old age..."
+
+# Re-enable Ctrl+C before starting new shell
+trap - INT TERM
 sh

@@ -13,20 +13,9 @@ remove_oh_my_zsh() {
     if path_exists "$ohmyzsh_dir"; then
         log_action "Removing Oh My Zsh installation and all configurations"
         
-        # Check if Oh My Zsh has an uninstall script
-        local uninstall_script="$ohmyzsh_dir/tools/uninstall.sh"
-        
-        if [ -f "$uninstall_script" ]; then
-            print_status "Using Oh My Zsh official uninstall script..."
-            # Run the official uninstaller
-            sh "$uninstall_script" --unattended 2>/dev/null || {
-                print_warning "Official uninstaller failed, proceeding with manual removal"
-                safe_remove "$ohmyzsh_dir" "Oh My Zsh directory"
-            }
-        else
-            # Manual removal if uninstall script doesn't exist
-            safe_remove "$ohmyzsh_dir" "Oh My Zsh directory"
-        fi
+        # Always use manual removal for complete cleanup
+        print_status "Using direct removal for complete cleanup..."
+        safe_remove "$ohmyzsh_dir" "Oh My Zsh directory"
     else
         print_status "Oh My Zsh not found, nothing to remove"
     fi
