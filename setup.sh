@@ -36,13 +36,36 @@ verify_plugins_and_themes "$SHELL_PRO_DIR"
 # 4. Backup existing .zshrc if it exists and is different
 backup_existing_config "$SHELL_PRO_DIR"
 
-# 5. Link or copy the .zshrc file
+# 5. Force apply our custom .zshrc (overwriting any Oh My Zsh template)
 setup_zshrc_config "$SHELL_PRO_DIR"
 
-# 6. Install required fonts (platform-specific)
+# 6. Double-check and ensure our custom .zshrc is in place
+print_status "Verifying custom .zshrc is properly applied..."
+if [ -f "$HOME/.zshrc" ]; then
+    if cmp -s "$HOME/.zshrc" "$SHELL_PRO_DIR/.zshrc"; then
+        print_success "Custom .zshrc is properly applied"
+    else
+        print_warning "Oh My Zsh template detected, forcing custom .zshrc..."
+        cp "$SHELL_PRO_DIR/.zshrc" "$HOME/.zshrc"
+        print_success "Custom .zshrc forced successfully"
+    fi
+else
+    print_error "No .zshrc found, creating custom one..."
+    cp "$SHELL_PRO_DIR/.zshrc" "$HOME/.zshrc"
+    print_success "Custom .zshrc created"
+fi
+
+# Clean up any Oh My Zsh template files that might have been created
+if [ -f "$HOME/.zshrc.pre-oh-my-zsh" ]; then
+    print_status "Cleaning up Oh My Zsh template backup..."
+    rm -f "$HOME/.zshrc.pre-oh-my-zsh"
+    print_success "Oh My Zsh template backup removed"
+fi
+
+# 7. Install required fonts (platform-specific)
 install_nerd_fonts
 
-# 7. Set zsh as default shell if not already
+# 8. Set zsh as default shell if not already
 setup_default_shell
 
 echo ""
