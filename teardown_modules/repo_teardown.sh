@@ -79,4 +79,8 @@ cleanup_shell_pro_references() {
     if [ "$found_references" = false ]; then
         print_success "No remaining Shell-Pro references found in common configuration files"
     fi
+
+    rm -rf ~/.zsh_sessions
+    rm -rf ~/.zsh_history
+    rm -rf ~/.zshenv
 }
